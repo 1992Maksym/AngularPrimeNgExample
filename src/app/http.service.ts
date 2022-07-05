@@ -8,6 +8,6 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
   getHttp(){
-    return this.http.get('https://swapi.dev/api/people')
+    return this.http.get('https://swapi.dev/api/peopler')
   }
 }

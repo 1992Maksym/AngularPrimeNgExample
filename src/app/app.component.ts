@@ -1,7 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
 import { map, tap, catchError } from 'rxjs/operators'
 import { HttpService } from './http.service'
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,7 @@ export class AppComponent implements OnInit{
   heroesName:any = [];
   heroesHeight:any = [];
   color:string = '#1fd219'
+  error:string = ''
 
   constructor(private httpService: HttpService) {}
 
@@ -44,12 +45,15 @@ export class AppComponent implements OnInit{
           ]
         };
       }),
+      catchError(err => {
+        this.error = err.message;
+        return of("From catchError");
+      })
     ).subscribe()
-
   }
+
   ngOnInit() {
     this.getData()
-
   }
 
 }
