@@ -8,6 +8,7 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 
 
 import { AppComponent } from './app.component';
+import {HttpService} from "./http.service";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     ColorPickerModule
   ],
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

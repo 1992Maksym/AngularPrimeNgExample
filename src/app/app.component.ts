@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { map, tap, } from 'rxjs/operators'
-import {ColorPicker} from "primeng/colorpicker";
-import {BehaviorSubject} from "rxjs";
+import { map, tap, catchError } from 'rxjs/operators'
+import { HttpService } from './http.service'
 
 @Component({
   selector: 'app-root',
@@ -16,7 +15,7 @@ export class AppComponent implements OnInit{
   heroesHeight:any = [];
   color:string = '#1fd219'
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpService: HttpService) {}
 
   change(event: any){
     this.color = event.value
@@ -25,7 +24,8 @@ export class AppComponent implements OnInit{
   }
 
   getData(){
-    return this.http.get('https://swapi.dev/api/people').pipe(
+    this.httpService.getHttp().
+    pipe(
       map((value: any) => {
         return value['results'].map((el: any) => {
           this.heroesName.push(el.name);
@@ -43,11 +43,13 @@ export class AppComponent implements OnInit{
             }
           ]
         };
-      })
+      }),
     ).subscribe()
+
   }
   ngOnInit() {
     this.getData()
+
   }
 
 }
