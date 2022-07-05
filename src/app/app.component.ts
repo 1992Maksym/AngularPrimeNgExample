@@ -14,24 +14,14 @@ export class AppComponent implements OnInit{
   basicData: any;
   heroesName:any = [];
   heroesHeight:any = [];
-  // color$:BehaviorSubject<string> = new BehaviorSubject<string>('#1fd219')
   color:string = '#1fd219'
 
   constructor(private http: HttpClient) {}
 
   change(event: any){
     this.color = event.value
-    console.log(event)
-    this.basicData = {
-      labels: this.heroesName,
-      datasets: [
-        {
-          label: 'Heroes height',
-          backgroundColor: this.color,
-          data: this.heroesHeight,
-        }
-      ]
-    }
+    this.basicData.datasets[0].backgroundColor = this.color
+    this.basicData = {...this.basicData};
   }
 
   getData(){
@@ -48,7 +38,7 @@ export class AppComponent implements OnInit{
           datasets: [
             {
               label: 'Heroes height',
-              backgroundColor: '#1fd219',
+              backgroundColor: this.color,
               data: this.heroesHeight,
             }
           ]
