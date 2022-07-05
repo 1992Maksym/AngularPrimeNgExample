@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartModule } from 'primeng/chart';
 import { HttpClientModule } from "@angular/common/http";
+import { ColorPickerModule } from 'primeng/colorpicker';
 
 
 import { AppComponent } from './app.component';
@@ -17,7 +18,8 @@ import { AppComponent } from './app.component';
     FormsModule,
     BrowserAnimationsModule,
     ChartModule,
-    HttpClientModule
+    HttpClientModule,
+    ColorPickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
