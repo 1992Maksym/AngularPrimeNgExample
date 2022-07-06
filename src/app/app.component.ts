@@ -1,8 +1,8 @@
 import { Component, OnInit, } from '@angular/core';
-import {map, tap, catchError, finalize} from 'rxjs/operators';
+import { map, tap, catchError, finalize } from 'rxjs/operators';
 import { HttpService } from './http.service';
-import {Observable, of} from "rxjs";
-// import {HttpEvent, HttpHandler, , } from "@angular/common/http";
+import { of } from "rxjs";
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +16,12 @@ export class AppComponent implements OnInit {
   heroesHeight:any = [];
   color:string = '#1fd219';
   error:string = '';
-  loader:boolean = true;
+  loader:boolean = false;
 
-  constructor(private httpService: HttpService) {}
+  constructor(
+    private httpService: HttpService,
+    private messageService: MessageService,
+  ) {}
 
   change(event: any){
     this.color = event.value
@@ -27,6 +30,7 @@ export class AppComponent implements OnInit {
   }
 
   getData(){
+    this.loader = true;
     this.httpService.getHttp().
     pipe(
       map((value: any) => {
@@ -49,6 +53,7 @@ export class AppComponent implements OnInit {
       }),
       catchError(err => {
         this.error = err.message;
+        this.showError()
         return of("From catchError");
 
       }),
@@ -56,9 +61,12 @@ export class AppComponent implements OnInit {
     ).subscribe()
   }
 
-
-  ngOnInit() {
-    this.getData()
+  showError() {
+    this.messageService.add({severity:'error', summary: 'Error', detail: this.error});
   }
+  clear() {
+    this.messageService.clear();
+  }
+  ngOnInit() {}
 
 }

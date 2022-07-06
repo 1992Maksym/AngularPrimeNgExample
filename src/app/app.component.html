@@ -1,5 +1,8 @@
-<div class="error-block" *ngIf="error">{{ error }}</div>
+<p-toast></p-toast>
+<button type="button" pButton pRipple (click)="getData()" label="Get graphic" class="p-button"></button>
+
 <div class="loader-block" *ngIf="loader; else done">Loading...</div>
+<!--<div class="error-block" *ngIf="error">{{ error }}</div>-->
 <ng-template #done>
   <div class="card">
     <p-chart type="bar" [data]="basicData"></p-chart>

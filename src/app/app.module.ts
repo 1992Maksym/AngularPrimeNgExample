@@ -5,9 +5,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartModule } from 'primeng/chart';
 import { HttpClientModule } from "@angular/common/http";
 import { ColorPickerModule } from 'primeng/colorpicker';
+import {ButtonModule} from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
 
 import { AppComponent } from './app.component';
 import {HttpService} from "./http.service";
+import {MessageService} from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -19,9 +22,11 @@ import {HttpService} from "./http.service";
     BrowserAnimationsModule,
     ChartModule,
     HttpClientModule,
-    ColorPickerModule
+    ColorPickerModule,
+    ButtonModule,
+    ToastModule
   ],
-  providers: [HttpService],
+  providers: [HttpService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
