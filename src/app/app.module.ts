@@ -6,7 +6,6 @@ import { ChartModule } from 'primeng/chart';
 import { HttpClientModule } from "@angular/common/http";
 import { ColorPickerModule } from 'primeng/colorpicker';
 
-
 import { AppComponent } from './app.component';
 import {HttpService} from "./http.service";
 

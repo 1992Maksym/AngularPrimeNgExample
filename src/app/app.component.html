@@ -1,7 +1,15 @@
 <div class="error-block" *ngIf="error">{{ error }}</div>
-<div class="card">
-  <p-chart type="bar" [data]="basicData"></p-chart>
-</div>
-<div class="picker-block">
-  <p-colorPicker [ngModel]="color" (onChange)="change($event)" ></p-colorPicker>
-</div>
+<div class="loader-block" *ngIf="loader; else done">Loading...</div>
+<ng-template #done>
+  <div class="card">
+    <p-chart type="bar" [data]="basicData"></p-chart>
+  </div>
+  <div class="picker-block">
+    <p-colorPicker [ngModel]="color" (onChange)="change($event)" ></p-colorPicker>
+  </div>
+</ng-template>
+
+
+
+
+

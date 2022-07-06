@@ -1,20 +1,22 @@
 import { Component, OnInit, } from '@angular/core';
-import { map, tap, catchError } from 'rxjs/operators'
-import { HttpService } from './http.service'
-import {of} from "rxjs";
+import {map, tap, catchError, finalize} from 'rxjs/operators';
+import { HttpService } from './http.service';
+import {Observable, of} from "rxjs";
+// import {HttpEvent, HttpHandler, , } from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
   basicData: any;
   heroesName:any = [];
   heroesHeight:any = [];
-  color:string = '#1fd219'
-  error:string = ''
+  color:string = '#1fd219';
+  error:string = '';
+  loader:boolean = true;
 
   constructor(private httpService: HttpService) {}
 
@@ -48,9 +50,12 @@ export class AppComponent implements OnInit{
       catchError(err => {
         this.error = err.message;
         return of("From catchError");
-      })
+
+      }),
+      finalize(() => this.loader = false)
     ).subscribe()
   }
+
 
   ngOnInit() {
     this.getData()

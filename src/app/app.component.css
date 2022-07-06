@@ -6,3 +6,8 @@
   font-size: 20px;
   color: red
 }
+.loader-block{
+  font-size: 28px;
+  width: max-content;
+  margin: 100px auto;
+}
